@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-bridge"
+version = "0.1.0"
+description = "Inter-agent coordination infrastructure for the dual-agent EVEZ stack"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "Steven Crawford-Maggard", email = "steven@evez-os.ai"}]
+keywords = ["agent", "mcp", "bridge", "evez"]
+dependencies = [
+    "numpy>=1.24",
+    "Pillow>=10.0",
+    "scipy>=1.10",
+    "nats-py>=2.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.ruff]
+line-length = 100
