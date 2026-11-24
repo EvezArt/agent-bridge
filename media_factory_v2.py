@@ -6,6 +6,7 @@ import json, math, time, hashlib, os
 import numpy as np
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+import subprocess
 
 OUT = Path(__file__).parent / "output"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -312,7 +313,7 @@ def consciousness_video(phi_values, name="consciousness_video"):
     
     # Try ffmpeg
     video_path = OUT / f"{name}.mp4"
-    os.system(f"ffmpeg -y -framerate 2 -i {frame_dir}/frame_%04d.png -pix_fmt yuv420p -c:v libx264 {video_path} 2>/dev/null")
+    subprocess.run(["ffmpeg", "-y", "-framerate", "2", "-i", str(frame_dir / "frame_%04d.png"), "-pix_fmt", "yuv420p", "-c:v", "libx264", str(video_path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
     
     if video_path.exists():
         # Also save as GIF
